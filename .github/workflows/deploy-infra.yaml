@@ -18,7 +18,7 @@ jobs:
       - name: "Login to Google"
         uses: "google-github-actions/auth@v2"
         with:
-          workload_identity_provider:   ${{ vars.WIF_PROVIDER }}
+          workload_identity_provider: ${{ vars.WIF_PROVIDER }}
           service_account: ${{ vars.DEPLOYER_EMAIL }}
       - name: "Setup Terraform"
         uses: "hashicorp/setup-terraform@v3"
