@@ -1,0 +1,30 @@
+name: Deploy Infrastructure
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "./terraform"
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v4"
+      - name: "Login to Google"
+        uses: "google-github-actions/auth@v2"
+        with:
+          workload_identity_provider:   ${{ vars.WIF_PROVIDER }}
+          service_account: ${{ vars.DEPLOYER_EMAIL }}
+      - name: "Setup Terraform"
+        uses: "hashicorp/setup-terraform@v3"
+      - name: "Terraform Init"
+        run: "terraform init -input=false"
+      - name: "Terraform Plan"
+        run: terraform plan -input=false
+      - name: "Terraform Apply"
+        run: terraform apply -auto-approve -input=false
