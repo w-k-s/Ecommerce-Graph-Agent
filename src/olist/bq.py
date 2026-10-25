@@ -3,6 +3,8 @@ from google.cloud import bigquery
 
 from olist.config import settings
 
+_client: bigquery.Client | None = None
+
 
 def client() -> bigquery.Client:
     global _client

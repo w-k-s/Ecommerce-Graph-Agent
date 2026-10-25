@@ -11,5 +11,5 @@ def download(dest=Path("data/raw")):
 
     kaggle = KaggleApi()
     kaggle.authenticate()
-    kaggle.dataset_download_files(dataset=DATASET, path=dest, unzip=True, force=True)
+    kaggle.dataset_download_files(dataset=DATASET, path=dest, unzip=True)
     return sorted(dest.glob("*.csv"))
