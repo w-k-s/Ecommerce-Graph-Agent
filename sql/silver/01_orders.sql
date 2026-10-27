@@ -11,9 +11,8 @@ WITH typed AS (
         SAFE_CAST(order_estimated_delivery_date AS TIMESTAMP) AS order_estimated_delivery_date
     FROM bronze.orders
 )
-SELECT (
+SELECT 
     *,
     TIMESTAMP_DIFF(order_delivered_customer_date, order_purchase_timestamp, DAY) AS delivery_days,
     (order_delivered_customer_date > order_estimated_delivery_date) AS is_late
-)
 FROM typed;
