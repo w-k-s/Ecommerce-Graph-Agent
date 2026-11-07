@@ -8,6 +8,7 @@ resource "google_project_iam_member" "pipeline_roles" {
     "roles/bigquery.dataEditor",
     "roles/bigquery.jobUser",
     "roles/storage.objectAdmin",
+    "roles/pubsub.publisher",
     "roles/aiplatform.user",
   ])
   project = var.project_id

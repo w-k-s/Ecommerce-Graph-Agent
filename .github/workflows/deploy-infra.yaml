@@ -28,3 +28,8 @@ jobs:
         run: terraform plan -input=false
       - name: "Terraform Apply"
         run: terraform apply -auto-approve -input=false
+      - name: Deploy BigQuery procedures
+        run: |
+          for f in sql/procedures/*.sql; do
+            bq query --use_legacy_sql=false < "$f"
+          done

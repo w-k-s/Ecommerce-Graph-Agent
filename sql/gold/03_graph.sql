@@ -13,10 +13,10 @@ CREATE OR REPLACE PROPERTY GRAPH gold.olist_graph
         SOURCE KEY (customer_id) REFERENCES node_customer (customer_id)
         DESTINATION KEY (order_id) REFERENCES node_purchase (order_id)
         LABEL PLACED,
-        gold.edge_contains AS contains KEY (order_id, product_id)
+        gold.edge_contains AS order_contains KEY (order_id, product_id)
         SOURCE KEY (order_id) REFERENCES node_purchase (order_id)
         DESTINATION KEY (product_id) REFERENCES node_product (product_id)
-        LABEL CONTAINS,
+        LABEL ORDER_CONTAINS,
         gold.edge_fulfilled AS fulfilled KEY (seller_id, order_id)
         SOURCE KEY (seller_id) REFERENCES node_seller (seller_id)
         DESTINATION KEY (order_id) REFERENCES node_purchase (order_id)
